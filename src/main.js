@@ -12,6 +12,10 @@ let player;
 (async () => {
   await loadWorld(scene);
   player = await loadPlayer(scene);
+
+  // نثبت الكاميرا في مكان واحد وتنظر للاعب
+  camera.position.set(0, 8, 15);
+  camera.lookAt(player.position);
 })();
 
 // تحديث اللعبة كل إطار
@@ -19,18 +23,17 @@ function update(dt) {
   if (!player) return;
 
   const move = input.move;
+  const speed = 8; // سرعة اللاعب
 
-  const speed = 5; // سرعة اللاعب
-
-  if (move.forward) player.position.z -= dt * speed;
+  if (move.forward)  player.position.z -= dt * speed;
   if (move.backward) player.position.z += dt * speed;
-  if (move.left) player.position.x -= dt * speed;
-  if (move.right) player.position.x += dt * speed;
+  if (move.left)     player.position.x -= dt * speed;
+  if (move.right)    player.position.x += dt * speed;
 
-  // الكاميرا تتبع اللاعب من الخلف
-  camera.position.set(player.position.x, 5, player.position.z + 10);
+  // الكاميرا ثابتة تنظر للاعب فقط
   camera.lookAt(player.position);
 
+  // رسم المشهد
   renderer.render(scene, camera);
 }
 
