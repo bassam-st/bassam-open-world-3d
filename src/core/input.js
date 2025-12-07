@@ -30,6 +30,7 @@ export function initInput() {
       if (dir === "right")    input.move.right    = v;
     };
 
+    // لمس
     btn.addEventListener("touchstart", (e) => {
       e.preventDefault();
       setDir(true);
@@ -40,6 +41,7 @@ export function initInput() {
       setDir(false);
     }, { passive: false });
 
+    // ماوس (لو فتح من كمبيوتر)
     btn.addEventListener("mousedown", () => setDir(true));
     btn.addEventListener("mouseup", () => setDir(false));
     btn.addEventListener("mouseleave", () => setDir(false));
